@@ -33,7 +33,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <Stack gap="xs">
             <NavLink
               href="/"
-              label="Dashboard"
+              label="Painel de Controle"
               leftSection={<IconDashboard size="1rem" />}
               active={isDashboard}
               onClick={(e) => {
@@ -47,7 +47,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             />
             <NavLink
               href="/movies"
-              label="List"
+              label="Lista de Filmes"
               leftSection={<IconList size="1rem" />}
               active={isMoviesList}
               onClick={(e) => {

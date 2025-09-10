@@ -12,7 +12,10 @@ import {
   Pagination,
   Stack,
   Text,
+  Button,
+  Flex,
 } from "@mantine/core";
+import { IconSearch } from "@tabler/icons-react";
 import { useMovies } from "../hooks";
 
 const MoviesList: React.FC = () => {
@@ -37,24 +40,20 @@ const MoviesList: React.FC = () => {
     setYearFilter(typeof value === "number" ? value : "");
   }, []);
 
-  const handleYearBlur = useCallback(() => {
-    updateFilters({ year: yearFilter || undefined, page: 0 });
-  }, [yearFilter, updateFilters]);
+  const handleWinnerChange = useCallback((value: string | null) => {
+    setWinnerFilter(value || "");
+  }, []);
 
-  const handleWinnerChange = useCallback(
-    (value: string | null) => {
-      const newWinnerFilter = value || "";
-      setWinnerFilter(newWinnerFilter);
-      updateFilters({
-        winner: newWinnerFilter ? newWinnerFilter === "true" : undefined,
-        page: 0,
-      });
-    },
-    [updateFilters]
-  );
+  const handleSearch = useCallback(() => {
+    updateFilters({
+      year: yearFilter || undefined,
+      winner: winnerFilter ? winnerFilter === "true" : undefined,
+      page: 0,
+    });
+  }, [yearFilter, winnerFilter, updateFilters]);
 
   const winnerOptions = [
-    { value: "", label: "Sim/Não" },
+    { value: "", label: "Todos" },
     { value: "true", label: "Sim" },
     { value: "false", label: "Não" },
   ];
@@ -78,8 +77,40 @@ const MoviesList: React.FC = () => {
     <Container size="xl" p="md">
       <Stack gap="md">
         <Title order={2} c="#333">
-          Lista de filmes
+          Lista de Filmes
         </Title>
+
+        {/* Seção de Filtros */}
+        <Paper shadow="xs" p="md" withBorder>
+          <Text size="sm" fw={500} mb="md">
+            Filtros
+          </Text>
+          <Flex gap="md" align="end">
+            <NumberInput
+              label="Ano"
+              placeholder="Digite o ano"
+              value={yearFilter}
+              onChange={handleYearChange}
+              min={1900}
+              max={2024}
+              style={{ width: 150 }}
+            />
+            <Select
+              label="Vencedor"
+              data={winnerOptions}
+              value={winnerFilter}
+              onChange={handleWinnerChange}
+              style={{ width: 150 }}
+            />
+            <Button
+              leftSection={<IconSearch size={16} />}
+              onClick={handleSearch}
+              variant="filled"
+            >
+              Pesquisar
+            </Button>
+          </Flex>
+        </Paper>
 
         <Paper shadow="xs" p="md" withBorder>
           <LoadingOverlay visible={loading} />
@@ -88,49 +119,24 @@ const MoviesList: React.FC = () => {
             <Table.Thead>
               <Table.Tr>
                 <Table.Th>
-                  <Stack gap="xs">
-                    <Text size="sm" fw={500}>
-                      ID
-                    </Text>
-                  </Stack>
+                  <Text size="sm" fw={500}>
+                    ID
+                  </Text>
                 </Table.Th>
                 <Table.Th>
-                  <Stack gap="xs">
-                    <Text size="sm" fw={500}>
-                      Ano
-                    </Text>
-                    <NumberInput
-                      placeholder="Filtrar por ano"
-                      value={yearFilter}
-                      onChange={handleYearChange}
-                      onBlur={handleYearBlur}
-                      min={1900}
-                      max={2024}
-                      size="xs"
-                      style={{ width: 120 }}
-                    />
-                  </Stack>
+                  <Text size="sm" fw={500}>
+                    Ano
+                  </Text>
                 </Table.Th>
                 <Table.Th>
-                  <Stack gap="xs">
-                    <Text size="sm" fw={500}>
-                      Título
-                    </Text>
-                  </Stack>
+                  <Text size="sm" fw={500}>
+                    Título
+                  </Text>
                 </Table.Th>
                 <Table.Th>
-                  <Stack gap="xs">
-                    <Text size="sm" fw={500}>
-                      Vencedor?
-                    </Text>
-                    <Select
-                      data={winnerOptions}
-                      value={winnerFilter}
-                      onChange={handleWinnerChange}
-                      size="xs"
-                      style={{ width: 100 }}
-                    />
-                  </Stack>
+                  <Text size="sm" fw={500}>
+                    Vencedor?
+                  </Text>
                 </Table.Th>
               </Table.Tr>
             </Table.Thead>

@@ -22,7 +22,7 @@ const Dashboard: React.FC = () => {
     loading: winnersLoading,
     error: winnersError,
     handleYearChange,
-    handleYearBlur,
+    handleSearch,
   } = useWinnersSearch();
 
   useEffect(() => {
@@ -46,7 +46,7 @@ const Dashboard: React.FC = () => {
     <Container size="xl" p="md">
       <Stack gap="md">
         <Title order={2} c="#333">
-          Dashboard
+          Painel de Controle
         </Title>
         <Grid>
           <Grid.Col span={6}>
@@ -67,7 +67,7 @@ const Dashboard: React.FC = () => {
               searchYear={searchYear}
               isLoading={winnersLoading}
               onYearChange={handleYearChange}
-              onBlur={handleYearBlur}
+              onSearch={handleSearch}
             />
           </Grid.Col>
         </Grid>
