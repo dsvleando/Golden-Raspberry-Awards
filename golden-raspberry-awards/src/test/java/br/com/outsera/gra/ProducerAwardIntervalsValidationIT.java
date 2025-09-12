@@ -86,4 +86,29 @@ class ProducerAwardIntervalsValidationIT {
             assertThat(interval.getPreviousWin()).isLessThan(interval.getFollowingWin());
         });
     }
+
+    @Test
+    void shouldValidateSpecificProducerIntervals() {
+        ProducerAwardIntervals intervals = producerUseCase.getProducerAwardIntervals();
+
+        assertThat(intervals.getMax()).isNotEmpty();
+        boolean matthewVaughnFound = intervals.getMax().stream()
+                .anyMatch(interval -> 
+                    "Matthew Vaughn".equals(interval.getProducer()) &&
+                    interval.getInterval() == 13 &&
+                    interval.getPreviousWin() == 2002 &&
+                    interval.getFollowingWin() == 2015
+                );
+        assertThat(matthewVaughnFound).isTrue();
+
+        assertThat(intervals.getMin()).isNotEmpty();
+        boolean joelSilverFound = intervals.getMin().stream()
+                .anyMatch(interval -> 
+                    "Joel Silver".equals(interval.getProducer()) &&
+                    interval.getInterval() == 1 &&
+                    interval.getPreviousWin() == 1990 &&
+                    interval.getFollowingWin() == 1991
+                );
+        assertThat(joelSilverFound).isTrue();
+    }
 }

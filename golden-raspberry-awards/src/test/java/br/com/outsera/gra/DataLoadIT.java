@@ -25,7 +25,7 @@ class DataLoadIT {
 	@Test
 	void shouldLoadCsvOnStartup() {
 		assertThat(movieJpaRepository.count()).isEqualTo(206L);
-		assertThat(producerJpaRepository.count()).isEqualTo(300L);
+		assertThat(producerJpaRepository.count()).isEqualTo(360L);
 		assertThat(studioJpaRepository.count()).isEqualTo(59L);
 	}
 }
