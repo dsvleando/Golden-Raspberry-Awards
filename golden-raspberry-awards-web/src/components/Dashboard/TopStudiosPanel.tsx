@@ -13,14 +13,14 @@ const TopStudiosPanel: React.FC<TopStudiosPanelProps> = ({
 }) => (
   <Paper shadow="xs" p="md" withBorder>
     <Title order={4} mb="md" c="#333">
-      Top 3 estúdios com vencedores
+      Top 3 studios with winners
     </Title>
     <LoadingOverlay visible={isLoading} />
     <Table striped highlightOnHover>
       <Table.Thead>
         <Table.Tr>
-          <Table.Th>Nome</Table.Th>
-          <Table.Th>Contagem de Vitórias</Table.Th>
+          <Table.Th>Name</Table.Th>
+          <Table.Th>Win Count</Table.Th>
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody>

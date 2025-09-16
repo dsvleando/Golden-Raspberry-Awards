@@ -12,14 +12,14 @@ const YearsWithMultipleWinnersPanel: React.FC<
 > = ({ years, isLoading }) => (
   <Paper shadow="xs" p="md" withBorder>
     <Title order={4} mb="md" c="#333">
-      Anos com múltiplos vencedores
+      List years with multiple winners
     </Title>
     <LoadingOverlay visible={isLoading} />
     <Table striped highlightOnHover>
       <Table.Thead>
         <Table.Tr>
-          <Table.Th>Ano</Table.Th>
-          <Table.Th>Contagem de Vitórias</Table.Th>
+          <Table.Th>Year</Table.Th>
+          <Table.Th>Win Count</Table.Th>
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody>

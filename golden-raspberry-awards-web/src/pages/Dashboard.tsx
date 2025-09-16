@@ -46,7 +46,7 @@ const Dashboard: React.FC = () => {
     <Container size="xl" p="md">
       <Stack gap="md">
         <Title order={2} c="#333">
-          Painel de Controle
+          Dashboard
         </Title>
         <Grid>
           <Grid.Col span={6}>

@@ -83,7 +83,7 @@ describe('Dashboard Component', () => {
 
   it('deve renderizar o título do dashboard', () => {
     renderDashboard();
-    expect(screen.getByText('Painel de Controle')).toBeInTheDocument();
+    expect(screen.getByText('Dashboard')).toBeInTheDocument();
   });
 
   it('deve chamar loadDashboardData no useEffect', () => {
@@ -94,10 +94,10 @@ describe('Dashboard Component', () => {
   it('deve renderizar todos os painéis quando há dados', () => {
     renderDashboard();
     
-    expect(screen.getByText('Anos com múltiplos vencedores')).toBeInTheDocument();
-    expect(screen.getByText('Top 3 estúdios com vencedores')).toBeInTheDocument();
-    expect(screen.getByText('Produtores com maior e menor intervalo entre vitórias')).toBeInTheDocument();
-    expect(screen.getByText('Listar Vencedores de Filmes por Ano')).toBeInTheDocument();
+    expect(screen.getByText('List years with multiple winners')).toBeInTheDocument();
+    expect(screen.getByText('Top 3 studios with winners')).toBeInTheDocument();
+    expect(screen.getByText('Producers with longest and shortest interval between wins')).toBeInTheDocument();
+    expect(screen.getByText('List movie winners by year')).toBeInTheDocument();
   });
 
   it('deve exibir dados dos anos com múltiplos vencedores', () => {
@@ -191,9 +191,9 @@ describe('Dashboard Component', () => {
 
     renderDashboard();
     
-    expect(screen.getByText('Painel de Controle')).toBeInTheDocument();
-    expect(screen.getByText('Anos com múltiplos vencedores')).toBeInTheDocument();
-    expect(screen.getByText('Top 3 estúdios com vencedores')).toBeInTheDocument();
+    expect(screen.getByText('Dashboard')).toBeInTheDocument();
+    expect(screen.getByText('List years with multiple winners')).toBeInTheDocument();
+    expect(screen.getByText('Top 3 studios with winners')).toBeInTheDocument();
   });
 
   describe('Interações do usuário', () => {
@@ -201,7 +201,7 @@ describe('Dashboard Component', () => {
       const user = userEvent.setup();
       renderDashboard();
       
-      const yearInput = screen.getByPlaceholderText('Digite o ano');
+      const yearInput = screen.getByPlaceholderText('Search by year');
       await user.type(yearInput, '1980');
       
       expect(mockHandleYearChange).toHaveBeenCalledWith('1');
@@ -219,12 +219,12 @@ describe('Dashboard Component', () => {
       
       renderDashboard();
       
-      const searchButtons = screen.queryAllByText('Pesquisar');
+      const searchButtons = screen.queryAllByText('Search');
       if (searchButtons.length > 0) {
         await user.click(searchButtons[0]);
         expect(mockHandleSearch).toHaveBeenCalledTimes(1);
       } else {
-        expect(screen.getByText('Painel de Controle')).toBeInTheDocument();
+        expect(screen.getByText('Dashboard')).toBeInTheDocument();
       }
     });
 
@@ -232,7 +232,7 @@ describe('Dashboard Component', () => {
       const user = userEvent.setup();
       renderDashboard();
       
-      const yearInput = screen.getByPlaceholderText('Digite o ano');
+      const yearInput = screen.getByPlaceholderText('Search by year');
       await user.type(yearInput, 'abc1980def');
       
       expect(mockHandleYearChange).toHaveBeenCalledWith('1');
@@ -256,7 +256,7 @@ describe('Dashboard Component', () => {
 
       renderDashboard();
       
-      expect(screen.getByText('Painel de Controle')).toBeInTheDocument();
+      expect(screen.getByText('Dashboard')).toBeInTheDocument();
     });
 
     it('deve exibir loading quando buscando vencedores por ano', () => {
@@ -267,7 +267,7 @@ describe('Dashboard Component', () => {
 
       renderDashboard();
       
-      expect(screen.getByText('Painel de Controle')).toBeInTheDocument();
+      expect(screen.getByText('Dashboard')).toBeInTheDocument();
     });
   });
 
@@ -351,7 +351,7 @@ describe('Dashboard Component', () => {
 
       renderDashboard();
       
-      expect(screen.getByText('Nenhum vencedor encontrado para o ano 1999')).toBeInTheDocument();
+      expect(screen.getByText('No winners found for year 1999')).toBeInTheDocument();
     });
 
     it('não deve exibir mensagem de vazio quando ainda está carregando', () => {
@@ -364,7 +364,7 @@ describe('Dashboard Component', () => {
 
       renderDashboard();
       
-      expect(screen.queryByText('Nenhum vencedor encontrado para o ano 1999')).not.toBeInTheDocument();
+      expect(screen.queryByText('No winners found for year 1999')).not.toBeInTheDocument();
     });
   });
 
@@ -373,7 +373,7 @@ describe('Dashboard Component', () => {
       const user = userEvent.setup();
       renderDashboard();
       
-      const yearInputs = screen.queryAllByPlaceholderText('Digite o ano');
+      const yearInputs = screen.queryAllByPlaceholderText('Search by year');
       if (yearInputs.length > 0) {
         const yearInput = yearInputs[0];
         
@@ -385,7 +385,7 @@ describe('Dashboard Component', () => {
         expect(mockHandleYearChange).toHaveBeenCalledWith('8');
         expect(mockHandleYearChange).toHaveBeenCalledWith('0');
       } else {
-        expect(screen.getByText('Painel de Controle')).toBeInTheDocument();
+        expect(screen.getByText('Dashboard')).toBeInTheDocument();
       }
     });
   });

@@ -53,14 +53,14 @@ const MoviesList: React.FC = () => {
   }, [yearFilter, winnerFilter, updateFilters]);
 
   const winnerOptions = [
-    { value: "", label: "Todos" },
-    { value: "true", label: "Sim" },
-    { value: "false", label: "Não" },
+    { value: "", label: "Yes/No" },
+    { value: "true", label: "Yes" },
+    { value: "false", label: "No" },
   ];
 
   const isEmpty = useMemo(
-    () => movies.content.length === 0 && !loading,
-    [movies.content, loading]
+    () => movies?.content?.length === 0 && !loading,
+    [movies?.content, loading]
   );
 
   if (error) {
@@ -77,18 +77,18 @@ const MoviesList: React.FC = () => {
     <Container size="xl" p="md">
       <Stack gap="md">
         <Title order={2} c="#333">
-          Lista de Filmes
+          List movies
         </Title>
 
-        {/* Seção de Filtros */}
+        {/* Filters Section */}
         <Paper shadow="xs" p="md" withBorder>
           <Text size="sm" fw={500} mb="md">
-            Filtros
+            Filters
           </Text>
           <Flex gap="md" align="end">
             <NumberInput
-              label="Ano"
-              placeholder="Digite o ano"
+              label="Year"
+              placeholder="Filter by year"
               value={yearFilter}
               onChange={handleYearChange}
               min={1900}
@@ -96,7 +96,7 @@ const MoviesList: React.FC = () => {
               style={{ width: 150 }}
             />
             <Select
-              label="Vencedor"
+              label="Winner?"
               data={winnerOptions}
               value={winnerFilter}
               onChange={handleWinnerChange}
@@ -107,7 +107,7 @@ const MoviesList: React.FC = () => {
               onClick={handleSearch}
               variant="filled"
             >
-              Pesquisar
+              Search
             </Button>
           </Flex>
         </Paper>
@@ -125,48 +125,48 @@ const MoviesList: React.FC = () => {
                 </Table.Th>
                 <Table.Th>
                   <Text size="sm" fw={500}>
-                    Ano
+                    Year
                   </Text>
                 </Table.Th>
                 <Table.Th>
                   <Text size="sm" fw={500}>
-                    Título
+                    Title
                   </Text>
                 </Table.Th>
                 <Table.Th>
                   <Text size="sm" fw={500}>
-                    Vencedor?
+                    Winner?
                   </Text>
                 </Table.Th>
               </Table.Tr>
             </Table.Thead>
             <Table.Tbody>
-              {movies.content.map((movie) => (
+              {movies?.content?.map((movie) => (
                 <Table.Tr key={movie.id}>
                   <Table.Td>{movie.id}</Table.Td>
                   <Table.Td>{movie.year}</Table.Td>
                   <Table.Td>{movie.title}</Table.Td>
-                  <Table.Td>{movie.winner ? "Sim" : "Não"}</Table.Td>
+                  <Table.Td>{movie.winner ? "Yes" : "No"}</Table.Td>
                 </Table.Tr>
-              ))}
+              )) || []}
             </Table.Tbody>
           </Table>
 
           {isEmpty && (
             <Text c="dimmed" ta="center" py="xl">
-              Nenhum filme encontrado
+              No movies found
             </Text>
           )}
 
-          {movies.totalPages > 1 && (
+          {movies?.totalPages && movies.totalPages > 1 && (
             <Group justify="space-between" mt="md">
               <Text size="sm" c="dimmed">
-                Mostrando {movies.content.length} de {movies.totalElements}{" "}
-                filmes
+                Showing {movies?.content?.length || 0} of {movies?.totalElements || 0}{" "}
+                movies
               </Text>
               <Pagination
                 total={movies.totalPages}
-                value={movies.number + 1}
+                value={(movies?.number || 0) + 1}
                 onChange={(page) => changePage(page - 1)}
                 size="sm"
               />

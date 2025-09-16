@@ -63,16 +63,16 @@ describe('MoviesList Component', () => {
 
   it('deve renderizar o título da página', () => {
     renderMoviesList();
-    expect(screen.getByText('Lista de Filmes')).toBeInTheDocument();
+    expect(screen.getByText('List movies')).toBeInTheDocument();
   });
 
   it('deve renderizar os cabeçalhos da tabela', () => {
     renderMoviesList();
     
     expect(screen.getByText('ID')).toBeInTheDocument();
-    expect(screen.getAllByText('Ano')).toHaveLength(2);
-    expect(screen.getByText('Título')).toBeInTheDocument();
-    expect(screen.getByText('Vencedor?')).toBeInTheDocument();
+    expect(screen.getAllByText('Year')).toHaveLength(2);
+    expect(screen.getByText('Title')).toBeInTheDocument();
+    expect(screen.getAllByText('Winner?')).toHaveLength(2);
   });
 
   it('deve renderizar os filmes na tabela', () => {
@@ -83,17 +83,17 @@ describe('MoviesList Component', () => {
     expect(screen.getByText('1980')).toBeInTheDocument();
     expect(screen.getByText('1981')).toBeInTheDocument();
     
-    expect(screen.getAllByText('Sim').length).toBeGreaterThan(0);
-    expect(screen.getAllByText('Não').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('Yes').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('No').length).toBeGreaterThan(0);
   });
 
   it('deve renderizar os campos de filtro', () => {
     renderMoviesList();
     
-    expect(screen.getByText('Filtros')).toBeInTheDocument();
-    expect(screen.getAllByText('Ano')).toHaveLength(2);
-    expect(screen.getByText('Vencedor')).toBeInTheDocument();
-    expect(screen.getByText('Pesquisar')).toBeInTheDocument();
+    expect(screen.getByText('Filters')).toBeInTheDocument();
+    expect(screen.getAllByText('Year')).toHaveLength(2);
+    expect(screen.getAllByText('Winner?')).toHaveLength(2);
+    expect(screen.getByText('Search')).toBeInTheDocument();
   });
 
   describe('Interações do usuário', () => {
@@ -101,7 +101,7 @@ describe('MoviesList Component', () => {
       const user = userEvent.setup();
       renderMoviesList();
       
-      const yearInput = screen.getByPlaceholderText('Digite o ano');
+      const yearInput = screen.getByPlaceholderText('Filter by year');
       await user.type(yearInput, '1980');
       
       expect(yearInput).toHaveValue('1980');
@@ -111,18 +111,18 @@ describe('MoviesList Component', () => {
       const user = userEvent.setup();
       renderMoviesList();
       
-      const winnerSelect = screen.getByDisplayValue('Todos');
+      const winnerSelect = screen.getByDisplayValue('Yes/No');
       
       expect(winnerSelect).toBeInTheDocument();
       
-      expect(winnerSelect).toHaveValue('Todos');
+      expect(winnerSelect).toHaveValue('Yes/No');
     });
 
     it('deve chamar updateFilters quando clicar no botão pesquisar', async () => {
       const user = userEvent.setup();
       renderMoviesList();
       
-      const searchButton = screen.getByText('Pesquisar');
+      const searchButton = screen.getByText('Search');
       await user.click(searchButton);
       
       expect(mockUpdateFilters).toHaveBeenCalledWith({
@@ -136,10 +136,10 @@ describe('MoviesList Component', () => {
       const user = userEvent.setup();
       renderMoviesList();
       
-      const yearInput = screen.getByPlaceholderText('Digite o ano');
+      const yearInput = screen.getByPlaceholderText('Filter by year');
       await user.type(yearInput, '1980');
       
-      const searchButton = screen.getByText('Pesquisar');
+      const searchButton = screen.getByText('Search');
       await user.click(searchButton);
       
       expect(mockUpdateFilters).toHaveBeenCalledWith({
@@ -159,7 +159,7 @@ describe('MoviesList Component', () => {
 
       renderMoviesList();
       
-      expect(screen.getByText('Lista de Filmes')).toBeInTheDocument();
+      expect(screen.getByText('List movies')).toBeInTheDocument();
     });
 
     it('deve exibir mensagem de erro quando há erro', () => {
@@ -187,7 +187,7 @@ describe('MoviesList Component', () => {
 
       renderMoviesList();
       
-      expect(screen.getByText('Nenhum filme encontrado')).toBeInTheDocument();
+      expect(screen.getByText('No movies found')).toBeInTheDocument();
     });
   });
 
@@ -208,7 +208,7 @@ describe('MoviesList Component', () => {
 
       renderMoviesList();
       
-      expect(screen.getByText('Mostrando 2 de 30 filmes')).toBeInTheDocument();
+      expect(screen.getByText('Showing 2 of 30 movies')).toBeInTheDocument();
       expect(screen.getByRole('button', { name: '1' })).toBeInTheDocument();
       expect(screen.getByRole('button', { name: '2' })).toBeInTheDocument();
     });
@@ -320,7 +320,7 @@ describe('MoviesList Component', () => {
       const user = userEvent.setup();
       renderMoviesList();
       
-      const yearInput = screen.getByPlaceholderText('Digite o ano');
+      const yearInput = screen.getByPlaceholderText('Filter by year');
       
       await user.clear(yearInput);
       await user.type(yearInput, 'abc1980def');
@@ -332,12 +332,12 @@ describe('MoviesList Component', () => {
       const user = userEvent.setup();
       renderMoviesList();
       
-      const yearInput = screen.getByPlaceholderText('Digite o ano');
+      const yearInput = screen.getByPlaceholderText('Filter by year');
       await user.type(yearInput, '1980');
       
       await user.clear(yearInput);
       
-      const searchButton = screen.getByText('Pesquisar');
+      const searchButton = screen.getByText('Search');
       await user.click(searchButton);
       
       expect(mockUpdateFilters).toHaveBeenCalledWith({
@@ -352,8 +352,8 @@ describe('MoviesList Component', () => {
     it('deve ter labels apropriados para campos de filtro', () => {
       renderMoviesList();
       
-      expect(screen.getByLabelText('Ano')).toBeInTheDocument();
-      const vencedorLabels = screen.getAllByText('Vencedor');
+      expect(screen.getByLabelText('Year')).toBeInTheDocument();
+      const vencedorLabels = screen.getAllByText('Winner?');
       expect(vencedorLabels.length).toBeGreaterThan(0);
     });
 
@@ -361,15 +361,15 @@ describe('MoviesList Component', () => {
       renderMoviesList();
       
       expect(screen.getByRole('columnheader', { name: 'ID' })).toBeInTheDocument();
-      expect(screen.getByRole('columnheader', { name: 'Ano' })).toBeInTheDocument();
-      expect(screen.getByRole('columnheader', { name: 'Título' })).toBeInTheDocument();
-      expect(screen.getByRole('columnheader', { name: 'Vencedor?' })).toBeInTheDocument();
+      expect(screen.getByRole('columnheader', { name: 'Year' })).toBeInTheDocument();
+      expect(screen.getByRole('columnheader', { name: 'Title' })).toBeInTheDocument();
+      expect(screen.getByRole('columnheader', { name: 'Winner?' })).toBeInTheDocument();
     });
 
     it('deve ter botão de pesquisa acessível', () => {
       renderMoviesList();
       
-      const searchButton = screen.getByRole('button', { name: 'Pesquisar' });
+      const searchButton = screen.getByRole('button', { name: 'Search' });
       expect(searchButton).toBeInTheDocument();
     });
   });

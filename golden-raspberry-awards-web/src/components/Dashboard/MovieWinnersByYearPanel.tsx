@@ -28,12 +28,12 @@ const MovieWinnersByYearPanel: React.FC<MovieWinnersByYearPanelProps> = ({
 }) => (
   <Paper shadow="xs" p="md" withBorder>
     <Title order={4} mb="md" c="#333">
-      Listar Vencedores de Filmes por Ano
+      List movie winners by year
     </Title>
     <Stack gap="md">
       <TextInput
-        label="Ano"
-        placeholder="Digite o ano"
+        label="Search by year"
+        placeholder="Search by year"
         value={searchYear}
         onChange={(event) => onYearChange(event.target.value.replace(/[^0-9]/g, ""))}
         min={1900}
@@ -44,9 +44,9 @@ const MovieWinnersByYearPanel: React.FC<MovieWinnersByYearPanelProps> = ({
       <Table striped highlightOnHover>
         <Table.Thead>
           <Table.Tr>
-            <Table.Th>ID</Table.Th>
-            <Table.Th>Ano</Table.Th>
-            <Table.Th>Título</Table.Th>
+            <Table.Th>Id</Table.Th>
+            <Table.Th>Year</Table.Th>
+            <Table.Th>Title</Table.Th>
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody>
@@ -61,7 +61,7 @@ const MovieWinnersByYearPanel: React.FC<MovieWinnersByYearPanelProps> = ({
       </Table>
       {searchYear && winners.length === 0 && !isLoading && (
         <Text c="dimmed" ta="center" py="xl">
-          Nenhum vencedor encontrado para o ano {searchYear}
+          No winners found for year {searchYear}
         </Text>
       )}
     </Stack>

@@ -20,57 +20,57 @@ const ProducerIntervalsPanel: React.FC<ProducerIntervalsPanelProps> = ({
 }) => (
   <Paper shadow="xs" p="md" withBorder>
     <Title order={4} mb="md" c="#333">
-      Produtores com maior e menor intervalo entre vitórias
+      Producers with longest and shortest interval between wins
     </Title>
     <LoadingOverlay visible={isLoading} />
     <Stack gap="md">
       <div>
         <Text fw={600} mb="sm" c="#333">
-          Máximo
+          Maximum
         </Text>
         <Table striped highlightOnHover>
           <Table.Thead>
             <Table.Tr>
-              <Table.Th>Produtor</Table.Th>
-              <Table.Th>Intervalo</Table.Th>
-              <Table.Th>Ano Anterior</Table.Th>
-              <Table.Th>Ano Seguinte</Table.Th>
+              <Table.Th>Producer</Table.Th>
+              <Table.Th>Interval</Table.Th>
+              <Table.Th>Previous Year</Table.Th>
+              <Table.Th>Following Year</Table.Th>
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody>
-            {intervals.max.map((producer: ProducerInterval, index: number) => (
+            {intervals?.max?.map((producer: ProducerInterval, index: number) => (
               <Table.Tr key={`max-${index}`}>
                 <Table.Td>{producer.producer}</Table.Td>
                 <Table.Td>{producer.interval}</Table.Td>
                 <Table.Td>{producer.previousWin}</Table.Td>
                 <Table.Td>{producer.followingWin}</Table.Td>
               </Table.Tr>
-            ))}
+            )) || []}
           </Table.Tbody>
         </Table>
       </div>
       <div>
         <Text fw={600} mb="sm" c="#333">
-          Mínimo
+          Minimum
         </Text>
         <Table striped highlightOnHover>
           <Table.Thead>
             <Table.Tr>
-              <Table.Th>Produtor</Table.Th>
-              <Table.Th>Intervalo</Table.Th>
-              <Table.Th>Ano Anterior</Table.Th>
-              <Table.Th>Ano Seguinte</Table.Th>
+              <Table.Th>Producer</Table.Th>
+              <Table.Th>Interval</Table.Th>
+              <Table.Th>Previous Year</Table.Th>
+              <Table.Th>Following Year</Table.Th>
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody>
-            {intervals.min.map((producer: ProducerInterval, index: number) => (
+            {intervals?.min?.map((producer: ProducerInterval, index: number) => (
               <Table.Tr key={`min-${index}`}>
                 <Table.Td>{producer.producer}</Table.Td>
                 <Table.Td>{producer.interval}</Table.Td>
                 <Table.Td>{producer.previousWin}</Table.Td>
                 <Table.Td>{producer.followingWin}</Table.Td>
               </Table.Tr>
-            ))}
+            )) || []}
           </Table.Tbody>
         </Table>
       </div>

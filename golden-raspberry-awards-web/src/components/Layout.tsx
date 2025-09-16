@@ -23,7 +23,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <AppShell.Header>
         <Group h="100%" px="md">
           <Text fw={600} size="lg">
-            Golden Raspberry Awards
+            Frontend Angular Test
           </Text>
         </Group>
       </AppShell.Header>
@@ -33,7 +33,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <Stack gap="xs">
             <NavLink
               href="/"
-              label="Painel de Controle"
+              label="Dashboard"
               leftSection={<IconDashboard size="1rem" />}
               active={isDashboard}
               onClick={(e) => {
@@ -47,7 +47,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             />
             <NavLink
               href="/movies"
-              label="Lista de Filmes"
+              label="List"
               leftSection={<IconList size="1rem" />}
               active={isMoviesList}
               onClick={(e) => {
